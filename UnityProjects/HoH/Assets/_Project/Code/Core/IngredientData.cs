@@ -14,8 +14,10 @@ namespace _Project.Code.Core
          public IngredientCategory category;
          public Sprite rawSprite;
          public Sprite processedSprite;
-         public bool isProcessed;
          public CombinationRuleData combinationRuleData;
          public IngredientType ingredientType;
+         // NOTE: 'isProcessed' was removed from this SO deliberately. Processed-ness is
+         // runtime state on the Ingredient instance; a flag on shared data claims to
+         // speak for every instance in the game at once, and can only mislead.
     }
 }

@@ -20,8 +20,12 @@ namespace _Project.Code.Gameplay.Systems
         [Tooltip("All authored CombinationRuleData assets.")] [SerializeField]
         private CombinationRuleData[] combinationRules;
 
-        [Tooltip("Where a successful combination's result item is spawned.")]
+        [Tooltip("Where result items appear. Leave empty to spawn beside this component — " +
+                 "which, with the system living on the workbench, is exactly where the work happens.")]
         public Transform itemSpawnTransform;
+
+        [Tooltip("Offset from the spawn transform, so items pop out beside the bench instead of inside it.")]
+        [SerializeField] private Vector3 spawnOffset = new(0f, 1f, 0.75f);
 
         /// <summary>
         ///     Observer hook. InventorySystem stores Success results;
@@ -54,8 +58,16 @@ namespace _Project.Code.Gameplay.Systems
             {
                 if (!rule.Matches(stagedData)) continue;
 
-                if (rule.outcomeType == OutcomeType.Success && rule.resultItem != null)
-                    Instantiate(rule.resultItem, itemSpawnTransform);
+                // The outcome type decides inventory and mess (via listeners); the physical
+                // result spawns for ANY rule that authored one. A salad is still a salad
+                // even when it isn't a remedy. Spawned at a world position, NOT parented —
+                // results are free physics objects, not children of the bench.
+                if (rule.resultItem != null)
+                {
+                    var anchor = itemSpawnTransform != null ? itemSpawnTransform : transform;
+                    var spawnPosition = anchor.position + anchor.TransformVector(spawnOffset);
+                    Instantiate(rule.resultItem, spawnPosition, Quaternion.identity);
+                }
 
                 return Resolve(new OutcomeResult(rule.outcomeType, rule.resultName));
             }

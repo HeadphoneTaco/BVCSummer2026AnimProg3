@@ -17,14 +17,24 @@ namespace _Project.Code.Gameplay.Player
 
         [Header("Input")] [SerializeField] private InputActionReference interactAction;
 
+        [Tooltip("Key name shown in the prompt. Must match the interact action's actual binding.")]
+        [SerializeField] private string promptKeyLabel = "E";
+
         private IInteractable currentTarget;
         private readonly Collider[] overlapBuffer = new Collider[8];
+        private bool warnedAboutLayerMask;
 
         private void Update()
         {
             FindClosestInteractable();
 
-            if (currentTarget != null && interactAction != null && interactAction.action.WasPressedThisFrame())
+            // Prefer the assigned InputAction; fall back to the E key so an unassigned
+            // reference degrades to working defaults instead of a silent dead button.
+            var pressed = interactAction != null
+                ? interactAction.action.WasPressedThisFrame()
+                : Input.GetKeyDown(KeyCode.E);
+
+            if (currentTarget != null && pressed)
                 currentTarget.Interact(gameObject);
         }
 
@@ -43,9 +53,20 @@ namespace _Project.Code.Gameplay.Player
         {
             if (currentTarget == null) return;
 
-            var prompt = $"[E] {currentTarget.GetInteractionPrompt()}";
-            var style = new GUIStyle(GUI.skin.box) { fontSize = 16, alignment = TextAnchor.MiddleCenter };
-            GUI.Box(new Rect(Screen.width / 2f - 120, Screen.height - 100, 240, 40), prompt, style);
+            var prompt = $"[{promptKeyLabel}] {currentTarget.GetInteractionPrompt()}";
+            var style = new GUIStyle(GUI.skin.box)
+            {
+                fontSize = 16,
+                alignment = TextAnchor.MiddleCenter,
+                wordWrap = true
+            };
+
+            // Size the box to its content instead of clipping: grow up to a max width,
+            // then wrap and grow downward.
+            var content = new GUIContent(prompt);
+            var width = Mathf.Min(style.CalcSize(content).x + 24f, 440f);
+            var height = style.CalcHeight(content, width) + 12f;
+            GUI.Box(new Rect((Screen.width - width) / 2f, Screen.height - 100, width, height), prompt, style);
         }
 
         private void OnDrawGizmosSelected()
@@ -56,8 +77,23 @@ namespace _Project.Code.Gameplay.Player
 
         private void FindClosestInteractable()
         {
+            // An unassigned LayerMask is "Nothing", which silently finds nothing.
+            // Treat that as "Everything" and say so once, so the misconfiguration is visible.
+            var mask = interactableLayer.value;
+            if (mask == 0)
+            {
+                if (!warnedAboutLayerMask)
+                {
+                    Debug.LogWarning("[PlayerInteraction] Interactable Layer is set to Nothing — " +
+                                     "searching all layers. Assign a layer to silence this.", this);
+                    warnedAboutLayerMask = true;
+                }
+
+                mask = ~0;
+            }
+
             var count = Physics.OverlapSphereNonAlloc(transform.position, interactionRadius, overlapBuffer,
-                interactableLayer);
+                mask);
 
             IInteractable best = null;
             var bestDist = float.MaxValue;

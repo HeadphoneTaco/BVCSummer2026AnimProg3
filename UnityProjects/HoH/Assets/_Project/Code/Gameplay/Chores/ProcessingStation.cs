@@ -11,7 +11,14 @@ namespace _Project.Code.Gameplay.Chores
     /// </summary>
     public class ProcessingStation : MonoBehaviour, IInteractable
     {
+        [Tooltip("Auto-filled from this object if left empty — the system lives on the station.")]
         [SerializeField] private ProcessingSystem processingSystem;
+
+        private void Awake()
+        {
+            // The equipment owns its systems: prefer a sibling on this same object.
+            if (processingSystem == null) processingSystem = GetComponent<ProcessingSystem>();
+        }
 
         [Tooltip("Ingredients placed at this station, assigned via Inspector or at runtime.")] [SerializeField]
         private List<Ingredient> ingredientsAtStation = new();
@@ -46,16 +53,46 @@ namespace _Project.Code.Gameplay.Chores
                 Debug.Log("[ProcessingStation] Nothing left to process.");
         }
 
-        /// <summary>Called by IngredientPickup or drag-and-drop when the player places an ingredient here.</summary>
+        /// <summary>
+        ///     Physical registration, same pattern as ChemistryWorkbench: an ingredient dropped
+        ///     into the station's trigger zone joins the queue; removing it leaves the queue.
+        ///     Requires a collider with Is Trigger enabled on this object.
+        /// </summary>
+        private void OnTriggerEnter(Collider other)
+        {
+            var ingredient = FindIngredient(other);
+            if (ingredient != null) AddIngredient(ingredient);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var ingredient = FindIngredient(other);
+            if (ingredient != null) RemoveIngredient(ingredient);
+        }
+
+        private static Ingredient FindIngredient(Collider col)
+        {
+            if (col == null) return null;
+            return col.attachedRigidbody != null
+                ? col.attachedRigidbody.GetComponent<Ingredient>()
+                : col.GetComponent<Ingredient>();
+        }
+
+        /// <summary>Adds an ingredient to the station queue (trigger zone or drag-and-drop).</summary>
         public void AddIngredient(Ingredient ingredient)
         {
-            if (!ingredientsAtStation.Contains(ingredient))
-                ingredientsAtStation.Add(ingredient);
+            if (ingredientsAtStation.Contains(ingredient)) return;
+
+            ingredientsAtStation.Add(ingredient);
+            Debug.Log($"[ProcessingStation] Queued: {ingredient.GetData().ingredientName} " +
+                      $"({ingredientsAtStation.Count} at station)");
         }
 
         public void RemoveIngredient(Ingredient ingredient)
         {
-            ingredientsAtStation.Remove(ingredient);
+            if (ingredientsAtStation.Remove(ingredient))
+                Debug.Log($"[ProcessingStation] Removed: {ingredient.GetData().ingredientName} " +
+                          $"({ingredientsAtStation.Count} at station)");
         }
     }
 }

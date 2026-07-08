@@ -9,7 +9,7 @@ namespace _Project.Code.Testing
 {
     /// <summary>
     ///     Gym for ChemistrySystem. Runs a fixed set of combination cases on Start
-    ///     (and again on Space) and logs PASS/FAIL per case plus a summary.
+    ///     (and again on F5) and logs PASS/FAIL per case plus a summary.
     ///     Also subscribes to OnCombinationResolved to prove the Observer event fires —
     ///     this gym is the first listener the event ever had.
     /// </summary>
@@ -36,7 +36,9 @@ namespace _Project.Code.Testing
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) RunAllCases();
+            // F5 = rerun. Deliberately NOT Space — that's the player's jump,
+            // and a test harness must never share keys with gameplay.
+            if (Input.GetKeyDown(KeyCode.F5)) RunAllCases();
         }
 
         private void OnEnable()

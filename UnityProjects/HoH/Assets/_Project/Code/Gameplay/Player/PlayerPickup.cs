@@ -37,7 +37,6 @@ namespace _Project.Code.Gameplay.Player
                 pickupRadius = sphere.radius * maxAxis;
             }
         }
-//TODO:make this simpler
         private void Update()
         {
             if (Input.GetMouseButtonDown(0)) TryGrab();

@@ -12,10 +12,20 @@ namespace _Project.Code.Gameplay.Chores
     /// </summary>
     public class ChemistryWorkbench : MonoBehaviour, IInteractable
     {
+        [Tooltip("Auto-filled from this object if left empty — the system lives on the bench.")]
         [SerializeField] private ChemistrySystem chemistrySystem;
+
+        [Tooltip("Auto-filled from this object if left empty.")]
         [SerializeField] private CleaningSystem cleaningSystem;
 
         private readonly List<IIngredient> stagedIngredients = new();
+
+        private void Awake()
+        {
+            // The equipment owns its systems: prefer siblings on this same object.
+            if (chemistrySystem == null) chemistrySystem = GetComponent<ChemistrySystem>();
+            if (cleaningSystem == null) cleaningSystem = GetComponent<CleaningSystem>();
+        }
 
         public IReadOnlyList<IIngredient> StagedIngredients => stagedIngredients;
 
