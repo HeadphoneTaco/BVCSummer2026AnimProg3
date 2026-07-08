@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc1e2a0ae2d14e4dbfbf25176c2b804, type: 3}
+  m_Name: Saline
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Code.Core.CombinationRuleData
+  ingredients:
+  - {fileID: 11400000, guid: 6251ad5a04b835e4daa09061e309134f, type: 2}
+  - {fileID: 11400000, guid: 67c9b4dcd622d474b9dbacf10bdea47f, type: 2}
+  outcomeType: 0
+  resultName: Saline
+  resultItem: {fileID: 5295609554119256851, guid: ab77d146f9818a24687f4f0faa5c174d, type: 3}
+  canCombine: 1
+  canAlsoCombine: 1
