@@ -28,8 +28,9 @@ namespace _Project.Code.Gameplay.Systems
         [SerializeField] private Vector3 spawnOffset = new(0f, 1f, 0.75f);
 
         /// <summary>
-        ///     Observer hook. InventorySystem stores Success results;
-        ///     CleaningSystem creates a mess on Neutral/Fail.
+        ///     Observer hook. CleaningSystem creates a mess on Neutral/Fail.
+        ///     Inventory and quota no longer listen here — they respond to
+        ///     DeliveryShelf.OnItemDelivered, since crafting only pays out on delivery.
         /// </summary>
         public static event Action<OutcomeResult> OnCombinationResolved;
 
@@ -66,7 +67,12 @@ namespace _Project.Code.Gameplay.Systems
                 {
                     var anchor = itemSpawnTransform != null ? itemSpawnTransform : transform;
                     var spawnPosition = anchor.position + anchor.TransformVector(spawnOffset);
-                    Instantiate(rule.resultItem, spawnPosition, Quaternion.identity);
+                    var spawned = Instantiate(rule.resultItem, spawnPosition, Quaternion.identity);
+
+                    // Stamp the rule's result name onto the spawned item so the delivery
+                    // shelf reports the same name the recipe authored — one source of truth,
+                    // regardless of what the prefab's Inspector field says.
+                    spawned.ItemName = rule.resultName;
                 }
 
                 return Resolve(new OutcomeResult(rule.outcomeType, rule.resultName));

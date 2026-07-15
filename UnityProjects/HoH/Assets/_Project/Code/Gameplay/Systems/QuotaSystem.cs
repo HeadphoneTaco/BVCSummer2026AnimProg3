@@ -1,25 +1,26 @@
 using System;
-using _Project.Code.Core;
-using _Project.Code.Core.Enums;
+using _Project.Code.Gameplay.Chores;
 using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
     /// <summary>
-    ///     Win condition: the house needs a quota of remedies crafted to end the day.
-    ///     Another Observer on OnCombinationResolved — it counts Success outcomes only
-    ///     and raises OnQuotaReached once. Knows nothing about UI or the chemistry internals.
+    ///     Win condition: the house needs a quota of remedies DELIVERED to end the day.
+    ///     Observer on DeliveryShelf.OnItemDelivered — crafting a remedy earns nothing
+    ///     until it reaches the shelf; the bench cooks, the shelf serves, and only
+    ///     served plates count. Raises OnQuotaReached once. Knows nothing about UI,
+    ///     the chemistry internals, or the shelf beyond its event.
     /// </summary>
     public class QuotaSystem : MonoBehaviour
     {
-        [Tooltip("Successful remedies required to complete the day.")] [SerializeField]
+        [Tooltip("Delivered remedies required to complete the day.")] [SerializeField]
         private int targetRemedies = 3;
 
         public int RemediesCrafted { get; private set; }
         public int TargetRemedies => targetRemedies;
         public bool QuotaReached => RemediesCrafted >= targetRemedies;
 
-        /// <summary>Raised on every counted success with (crafted, target).</summary>
+        /// <summary>Raised on every counted delivery with (delivered, target).</summary>
         public event Action<int, int> OnQuotaChanged;
 
         /// <summary>Raised once, when the day's quota is met.</summary>
@@ -27,20 +28,23 @@ namespace _Project.Code.Gameplay.Systems
 
         private void OnEnable()
         {
-            ChemistrySystem.OnCombinationResolved += HandleCombinationResolved;
+            DeliveryShelf.OnItemDelivered += HandleItemDelivered;
         }
 
         private void OnDisable()
         {
-            ChemistrySystem.OnCombinationResolved -= HandleCombinationResolved;
+            DeliveryShelf.OnItemDelivered -= HandleItemDelivered;
         }
 
-        private void HandleCombinationResolved(OutcomeResult result)
+        // Only combination results spawn Items and only Items can be delivered,
+        // so anything arriving here counts — per the design call that all three
+        // authored recipes count toward quota.
+        private void HandleItemDelivered(string itemName)
         {
-            if (result.OutcomeType != OutcomeType.Success || QuotaReached) return;
+            if (QuotaReached) return;
 
             RemediesCrafted++;
-            Debug.Log($"[QuotaSystem] Remedies: {RemediesCrafted}/{targetRemedies}");
+            Debug.Log($"[QuotaSystem] Delivered: {RemediesCrafted}/{targetRemedies}");
             OnQuotaChanged?.Invoke(RemediesCrafted, targetRemedies);
 
             if (QuotaReached)
