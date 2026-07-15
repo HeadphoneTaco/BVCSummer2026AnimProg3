@@ -16,7 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e7309f0e5efbda4f904053656fc674a, type: 2}
   - {fileID: 11400000, guid: 9c0f3408152c197489a1b084fe312c0e, type: 2}
   outcomeType: 0
-  resultName: Explosive Diarrhea
+  resultName: LaxativeBob
   resultItem: {fileID: 7080047649030420904, guid: befde17c657827d4cb9792ae749d7745, type: 3}
-  canCombine: 1
-  canAlsoCombine: 1
