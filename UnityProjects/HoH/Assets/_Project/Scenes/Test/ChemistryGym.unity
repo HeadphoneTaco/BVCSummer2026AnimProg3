@@ -327,7 +327,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100000002}
-  - component: {fileID: 100000004}
   - component: {fileID: 100000005}
   - component: {fileID: 100000007}
   m_Layer: 0
@@ -352,25 +351,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &100000004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000001}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3d5e1f2a7b4c9d8e0f1a2b3c4d5e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chemistrySystem: {fileID: 923145056}
-  water: {fileID: 11400000, guid: 6251ad5a04b835e4daa09061e309134f, type: 2}
-  powders: {fileID: 11400000, guid: 67c9b4dcd622d474b9dbacf10bdea47f, type: 2}
-  herbs: {fileID: 11400000, guid: 3b4358a874509e44d99470e2e5a80d59, type: 2}
-  oils: {fileID: 11400000, guid: 851c6e243a9e2e84593263f2b8dae670, type: 2}
-  fruits: {fileID: 11400000, guid: 2e7309f0e5efbda4f904053656fc674a, type: 2}
-  gunpowder: {fileID: 11400000, guid: 9c0f3408152c197489a1b084fe312c0e, type: 2}
 --- !u!114 &100000005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,17 +1021,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eabb4ebf7aa0661469d576c978fe8863, type: 3}
---- !u!114 &923145056 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4151223222262596196, guid: eabb4ebf7aa0661469d576c978fe8863, type: 3}
-  m_PrefabInstance: {fileID: 923145055}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf2d2f89df4c37438a940440ea881a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Code.Gameplay.Systems.ChemistrySystem
 --- !u!1 &1118878865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +1911,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4115688392269391392, guid: 1678634d827a8164da05557140b3e647, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903092485378440397, guid: 1678634d827a8164da05557140b3e647, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903092485378440397, guid: 1678634d827a8164da05557140b3e647, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c18b248ed71e7a48b384baaed5f5997, type: 2}
     - target: {fileID: 8098321739341723522, guid: 1678634d827a8164da05557140b3e647, type: 3}
       propertyPath: m_Name
       value: SkeletonPlayer

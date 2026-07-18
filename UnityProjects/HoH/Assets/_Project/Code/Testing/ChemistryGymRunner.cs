@@ -71,7 +71,7 @@ namespace _Project.Code.Testing
                 (herbs, true), (oils, true));
 
             passed += RunCase("Explosive laxative (fail recipe)",
-                OutcomeType.Fail, "ExplosiveDiarrhea",
+                OutcomeType.Fail, "LaxativeBob",
                 (fruits, true), (gunpowder, true));
 
             passed += RunCase("Unknown mixture",
