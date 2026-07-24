@@ -73,13 +73,23 @@ namespace _Project.Code.Gameplay.Player
 
             heldBody = best;
             heldBody.isKinematic = true; // suspend physics while carried so it doesn't fall
+
+            // A carried object must also stop COLLIDING, not just falling. A solid
+            // kinematic box glued to the player overlaps the character capsule, the
+            // controller depenetrates, the box teleports back in — a feedback loop
+            // that compounds until the physics solver blows up (editor crash).
+            // While held it's a ghost; the world reacts when you set it down.
+            heldBody.detectCollisions = false;
         }
 
         private void Release()
         {
             if (heldBody == null) return;
 
-            heldBody.isKinematic = false; // hand it back to gravity
+            heldBody.detectCollisions = true;  // solid again — triggers re-see it here
+            heldBody.isKinematic = false;      // hand it back to gravity
+            heldBody.linearVelocity = Vector3.zero;  // drop clean, no inherited launch
+            heldBody.angularVelocity = Vector3.zero;
             heldBody = null;
         }
 

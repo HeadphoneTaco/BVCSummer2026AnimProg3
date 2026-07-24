@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using _Project.Code.Core;
-using _Project.Code.Core.Enums;
+using _Project.Code.Gameplay.Chores;
 using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
     /// <summary>
     ///     Manages the building inventory and ingredient storage.
-    ///     Subscribes to ChemistrySystem.OnCombinationResolved and stores successful outcomes.
+    ///     The building inventory is what has been DELIVERED to the shelf, not what
+    ///     the bench has produced — a remedy sitting on the floor beside the workbench
+    ///     is not in stock. Subscribes to DeliveryShelf.OnItemDelivered.
     ///     Foundational build: flat list, no sorting, filtering, or quantity tracking.
     /// </summary>
     public class InventorySystem : MonoBehaviour
@@ -22,24 +24,22 @@ namespace _Project.Code.Gameplay.Systems
         ///     to this instead of polling — the model never references the UI.
         /// </summary>
         public event Action OnInventoryChanged;
+
         private void OnEnable()
         {
-            ChemistrySystem.OnCombinationResolved += HandleCombinationResolved;
+            DeliveryShelf.OnItemDelivered += HandleItemDelivered;
         }
 
         private void OnDisable()
         {
-            ChemistrySystem.OnCombinationResolved -= HandleCombinationResolved;
+            DeliveryShelf.OnItemDelivered -= HandleItemDelivered;
         }
 
-        private void HandleCombinationResolved(OutcomeResult result)
+        private void HandleItemDelivered(string itemName)
         {
-            if (result.OutcomeType == OutcomeType.Success)
-            {
-                buildingInventory.Add(result.ResultName);
-                Debug.Log($"[InventorySystem] Added to building inventory: {result.ResultName}");
-                OnInventoryChanged?.Invoke();
-            }
+            buildingInventory.Add(itemName);
+            Debug.Log($"[InventorySystem] Added to building inventory: {itemName}");
+            OnInventoryChanged?.Invoke();
         }
 
         public void StoreIngredient(IngredientData ingredient)

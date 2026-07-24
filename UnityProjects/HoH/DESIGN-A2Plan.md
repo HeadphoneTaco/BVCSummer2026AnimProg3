@@ -10,6 +10,7 @@
 2. **Which chemistry design:** the staged workbench (`ChemistryWorkbench` — player places 2–3 processed ingredients, interacts to combine). The auto-trigger bench logic in `ChemistrySystem.OnTriggerEnter` gets **deleted**. Rationale: combining should be done *by* the player, not *to* the player, and the workbench is the design the spec's `Evaluate` path describes.
 3. **CombinationLookup:** **cut.** With a handful of recipes, `Evaluate` scans the rule array directly. One less dead class; the trade-off (O(n) scan vs O(1) dictionary at this scale) goes in the reflection.
 4. **Win/lose:** simple quota. The building needs N remedies delivered to the shelf to end the day. Known recipes, clear goal, finishable. Discovery-mode (hidden recipes, experiment at your own risk) is noted in the spec as a post-A2 variant, not built.
+5. **Delivery (decided 2026-07-15):** quota and building inventory count on *delivery*, not on combine. `DeliveryShelf` trigger zone accepts a released item (held items are kinematic and ignored — dropping it there is the player decision, consistent with rule 2), raises `OnItemDelivered`, consumes the item. `QuotaSystem` and `InventorySystem` moved off `OnCombinationResolved` onto it; `CleaningSystem` stays on combine (messes happen at the bench). Spawned items are stamped with the rule's `resultName` so recipe data stays the single source of truth.
 
 ## Current Wiring Gaps (from check-in, verified in code)
 

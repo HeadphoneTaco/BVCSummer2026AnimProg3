@@ -15,7 +15,7 @@ MonoBehaviour:
   ingredients:
   - {fileID: 11400000, guid: 3b4358a874509e44d99470e2e5a80d59, type: 2}
   - {fileID: 11400000, guid: 851c6e243a9e2e84593263f2b8dae670, type: 2}
-  outcomeType: 0
+  outcomeType: 1
   resultName: Salad
   resultItem: {fileID: 3592787682542212646, guid: 9d1eac4808e983840b2d6b074a97a36e, type: 3}
   canCombine: 0
