@@ -18588,26 +18588,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3894446107904041565, guid: 1678634d827a8164da05557140b3e647, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.20000017
-      objectReference: {fileID: 0}
-    - target: {fileID: 3894446107904041565, guid: 1678634d827a8164da05557140b3e647, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5903092485378440397, guid: 1678634d827a8164da05557140b3e647, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233412201574199836, guid: 1678634d827a8164da05557140b3e647, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1999973
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233412201574199836, guid: 1678634d827a8164da05557140b3e647, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.9999974
-      objectReference: {fileID: 0}
     - target: {fileID: 8098321739341723522, guid: 1678634d827a8164da05557140b3e647, type: 3}
       propertyPath: m_Name
       value: Player
@@ -63515,7 +63495,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4c6a6aae92038b94ebb389fc2bfef3de, type: 2}
+  - {fileID: 2100000, guid: e3d29b8a661c6fa4894fb6dadb036ab3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
