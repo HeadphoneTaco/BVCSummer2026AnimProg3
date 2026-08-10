@@ -785,6 +785,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6177248013638329432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3071000460598273765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 491706181780429073}
+  m_Layer: 0
+  m_Name: TrackingTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491706181780429073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071000460598273765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8311175923445145676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3213276198810227402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,7 +1291,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 491706181780429073}
   m_Father: {fileID: 2103347539456074781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5975433511665242827
@@ -1823,6 +1855,7 @@ GameObject:
   - component: {fileID: 2803412511913923416}
   - component: {fileID: 9078266291065434137}
   - component: {fileID: 6921513900685780098}
+  - component: {fileID: 8480999959447322912}
   m_Layer: 0
   m_Name: F_Model_Game
   m_TagString: Untagged
@@ -1919,6 +1952,24 @@ CapsuleCollider:
   m_Height: 1.7751625
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &8480999959447322912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595481677594556137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bdb812458bd164ba4985f03fb1aef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  movementSpeed: 0
+  rotationSpeed: 0
+  runningSpeedMulitplier: 0
+  cameraTransform: {fileID: 0}
+  moveInputAction: {fileID: 0}
+  runInputAction: {fileID: 0}
 --- !u!1 &8657473821681660741
 GameObject:
   m_ObjectHideFlags: 0
