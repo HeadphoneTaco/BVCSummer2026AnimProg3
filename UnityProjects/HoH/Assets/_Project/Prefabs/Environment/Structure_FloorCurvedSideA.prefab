@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Structure_FloorCurved Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2379786922808882695, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+      propertyPath: m_Name
+      value: Structure_FloorCurvedSideA
+      objectReference: {fileID: 0}
     - target: {fileID: 4558923643431999608, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -64,11 +68,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7680187078645455598, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911192792172644108, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[1].renderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911192792172644108, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[1].renderer
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4555401176621193812, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+    - {fileID: 7680187078645455598, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 675988023690509288, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
     - {fileID: 8763505279384677031, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+    - {fileID: 4683831624711003333, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
+    - {fileID: 3840362584740111117, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac224e6d2f21d68458307d64d20a6f6c, type: 3}
