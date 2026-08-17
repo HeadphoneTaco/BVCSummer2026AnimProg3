@@ -44,12 +44,12 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.89
-    - _Strength: 0.31
+    - _Speed: 0.1
+    - _Strength: 0.1
     - _TexSpeedX: -0.01
     - _TexSpeedY: -0.01
     - _noisecontrol: 0.01
-    - _noisespeed: 0.85
+    - _noisespeed: 0.05
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

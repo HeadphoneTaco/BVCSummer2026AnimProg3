@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 094826b3f52f2a344ac975ff132faa9d
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  template:
+    name: Smoke
+    category: Environment
+    description: Simple effect for fire
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  useAsTemplate: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
