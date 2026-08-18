@@ -1,82 +1,88 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+namespace _Project.Code
 {
-    [SerializeField] float movementSpeed;
-    [SerializeField] float rotationSpeed;
-    [SerializeField] float runningSpeedMulitplier;
-
-    [SerializeField] Transform cameraTransform;
-
-    [SerializeField] InputActionReference moveInputAction;
-    [SerializeField] InputActionReference runInputAction;
-
-    Vector2 moveInput;
-
-    Rigidbody rb;
-
-    Animator anim;
-
-    float activeRunningSpeedMultiplier = 1f;
-
-    readonly int walkingAnimatorHash = Animator.StringToHash("Walking");
-    readonly int runningAnimatorHash = Animator.StringToHash("Running");
-
-    void Start()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-    }
+        [SerializeField] private float movementSpeed;
+        [SerializeField] private float rotationSpeed;
+        [SerializeField] private float runningSpeedMultiplier;
 
-    void Update()
-    {
-        moveInput = moveInputAction.action.ReadValue<Vector2>();
-    }
+        [SerializeField] private Transform cameraTransform;
 
-    private void FixedUpdate()
-    {
-        Vector3 cameraForward = cameraTransform.forward;
-        Vector3 cameraRight = cameraTransform.right;
+        [SerializeField] private InputActionReference moveInputAction;
+        [SerializeField] private InputActionReference runInputAction;
+        private readonly int runningAnimatorHash = Animator.StringToHash("Running");
 
-        cameraForward.y = 0;
-        cameraRight.y = 0;
+        private readonly int walkingAnimatorHash = Animator.StringToHash("Walking");
 
-        cameraForward.Normalize();
-        cameraRight.Normalize();
+        private float activeRunningSpeedMultiplier = 1f;
 
-        Vector3 moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
+        private Animator anim;
 
-        Vector3 velocity = moveDirection * movementSpeed * activeRunningSpeedMultiplier;
+        private Vector2 moveInput;
 
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+        private Rigidbody rb;
 
-        //Checks if the character is moving
-        if (moveDirection == Vector3.zero)
+        private void Start()
         {
-            anim.SetBool(walkingAnimatorHash, false);
-            anim.SetBool(runningAnimatorHash, false);
-            return;
+            rb = GetComponent<Rigidbody>();
+            anim = GetComponent<Animator>();
+
+            if (cameraTransform == null && Camera.main != null)
+                cameraTransform = Camera.main.transform;
         }
 
-        anim.SetBool(walkingAnimatorHash, true);
-
-        //Checking if 'Shift' is being pressed to execute running. If not, then the characteris walking.
-        if (runInputAction.action.IsPressed())
+        private void Update()
         {
-            anim.SetBool(runningAnimatorHash, true);
-            activeRunningSpeedMultiplier = runningSpeedMulitplier;
-        }
-        else
-        {
-            anim.SetBool(runningAnimatorHash, false);
-            activeRunningSpeedMultiplier = 1;
+            moveInput = moveInputAction.action.ReadValue<Vector2>();
         }
 
-        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+        private void FixedUpdate()
+        {
+            var cameraForward = cameraTransform.forward;
+            var cameraRight = cameraTransform.right;
 
-        Quaternion finalRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed);
+            cameraForward.y = 0;
+            cameraRight.y = 0;
 
-        rb.MoveRotation(finalRotation);
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            var moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
+
+            var velocity = moveDirection * movementSpeed * activeRunningSpeedMultiplier;
+
+            rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+
+            //Checks if the character is moving
+            if (moveDirection == Vector3.zero)
+            {
+                anim.SetBool(walkingAnimatorHash, false);
+                anim.SetBool(runningAnimatorHash, false);
+                return;
+            }
+
+            anim.SetBool(walkingAnimatorHash, true);
+
+            //Checking if 'Shift' is being pressed to execute running. If not, then the character is walking.
+            if (runInputAction.action.IsPressed())
+            {
+                anim.SetBool(runningAnimatorHash, true);
+                activeRunningSpeedMultiplier = runningSpeedMultiplier;
+            }
+            else
+            {
+                anim.SetBool(runningAnimatorHash, false);
+                activeRunningSpeedMultiplier = 1;
+            }
+
+            var targetRotation = Quaternion.LookRotation(moveDirection);
+
+            var finalRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed);
+
+            rb.MoveRotation(finalRotation);
+        }
     }
 }

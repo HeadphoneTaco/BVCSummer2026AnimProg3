@@ -11,7 +11,7 @@
 
 using UnityEngine;
 
-namespace KevinIglesias
+namespace _Project.Code
 {
     public class SpineProxy : MonoBehaviour
     {
