@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &832002430963170409
 Transform:
@@ -46,6 +46,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 832002430963170409}
     m_Modifications:
+    - target: {fileID: 4716532589554026992, guid: 2f8e13715777d52459453f3db4cbbdec, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5613578007924064292, guid: 2f8e13715777d52459453f3db4cbbdec, type: 3}
       propertyPath: m_Name
       value: Structure_WallCurved
@@ -152,6 +156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8001437366718001249, guid: 77a3b3697cf1d0b48b794da6341dae2b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -173,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 2572624652990234991, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
       propertyPath: m_Name
       value: Structure_FloorSquare
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161315711820870276, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8463536469061659748, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -236,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Structure_FloorSquare (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4161315711820870276, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8463536469061659748, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5877304
@@ -298,6 +314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Structure_FloorSquare (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4161315711820870276, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8463536469061659748, guid: e862583a52524bc45bb225e5898f5c8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4122696
@@ -359,6 +379,10 @@ PrefabInstance:
     - target: {fileID: 3553431082919002956, guid: b0990ed17a406bc49b699177c6a2a9f7, type: 3}
       propertyPath: m_Name
       value: Structure_FloorCurvedSideA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6148037706297245617, guid: b0990ed17a406bc49b699177c6a2a9f7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7113949385589478145, guid: b0990ed17a406bc49b699177c6a2a9f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -461,6 +485,10 @@ PrefabInstance:
     - target: {fileID: 4646802144833582531, guid: 77a3b3697cf1d0b48b794da6341dae2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001437366718001249, guid: 77a3b3697cf1d0b48b794da6341dae2b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
