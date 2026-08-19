@@ -156,3 +156,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Code.Gameplay.Ingredient
   data: {fileID: 11400000, guid: 2e7309f0e5efbda4f904053656fc674a, type: 2}
+  processedTint: {r: 0.55, g: 0.5, b: 0.65, a: 1}

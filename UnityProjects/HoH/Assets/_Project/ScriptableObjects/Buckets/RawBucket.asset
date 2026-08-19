@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9905e5f181904194ad6cb66e08c9fccd, type: 3}
+  m_Name: RawBucket
+  m_EditorClassIdentifier: CoreUtils::CoreUtils.AssetBuckets.PrefabBucket
+  m_BucketName: IngredientsRawBucket
+  m_Sources:
+  - {fileID: 102900000, guid: 2ddb90e6e53426248ae63b26b1c1cd01, type: 3}
+  m_AssetRefs:
+  - Name: powders
+    Guid: 315ca8033c2382b45a27c8fff3b6be01
+    Asset: {fileID: 4144098413193778247, guid: 315ca8033c2382b45a27c8fff3b6be01, type: 3}
+  - Name: gunpowder
+    Guid: 4ed0403a40d3bcc4eb31f355aa467dba
+    Asset: {fileID: 423641795309726865, guid: 4ed0403a40d3bcc4eb31f355aa467dba, type: 3}
+  - Name: herbs
+    Guid: 5d215f1938e9e514aaa39ab1467bcdab
+    Asset: {fileID: 7041215181659846570, guid: 5d215f1938e9e514aaa39ab1467bcdab, type: 3}
+  - Name: fruits
+    Guid: 7a898552cb8bd7e46b4b1fe2492dfcad
+    Asset: {fileID: 2968746036255410246, guid: 7a898552cb8bd7e46b4b1fe2492dfcad, type: 3}
+  - Name: water
+    Guid: b578777c572d52e439ab3b4e6d880cbc
+    Asset: {fileID: 1411399883640581913, guid: b578777c572d52e439ab3b4e6d880cbc, type: 3}
+  - Name: oils
+    Guid: d8bcf4db09b28d741b149f58dff88c1a
+    Asset: {fileID: 7871536148391541270, guid: d8bcf4db09b28d741b149f58dff88c1a, type: 3}
+  m_ManualUpdate: 0
