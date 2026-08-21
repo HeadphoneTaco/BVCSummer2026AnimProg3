@@ -16,7 +16,7 @@ public class PlayerInputManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         // Built here rather than in OnEnable. Every input script asks for this from its own
         // OnEnable, and Awake at this execution order is the only place guaranteed to have run
