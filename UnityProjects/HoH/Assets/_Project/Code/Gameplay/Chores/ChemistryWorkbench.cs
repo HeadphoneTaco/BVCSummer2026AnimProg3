@@ -113,10 +113,6 @@ namespace _Project.Code.Gameplay.Chores
             stagedIngredients.Clear();
         }
 
-        /// <summary>
-        ///     A combination consumes its ingredients regardless of outcome —
-        ///     destroy the staged ingredient objects and empty the list.
-        /// </summary>
         private void ConsumeStagedIngredients()
         {
             foreach (var ingredient in stagedIngredients)

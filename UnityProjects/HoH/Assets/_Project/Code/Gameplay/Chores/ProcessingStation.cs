@@ -5,10 +5,6 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Chores
 {
-    /// <summary>
-    ///     A world-space processing station. The player drops ingredients here;
-    ///     interacting processes all unprocessed ingredients in the station's queue.
-    /// </summary>
     public class ProcessingStation : MonoBehaviour, IInteractable
     {
         [Tooltip("Auto-filled from this object if left empty — the system lives on the station.")]
@@ -53,11 +49,6 @@ namespace _Project.Code.Gameplay.Chores
                 Debug.Log("[ProcessingStation] Nothing left to process.");
         }
 
-        /// <summary>
-        ///     Physical registration, same pattern as ChemistryWorkbench: an ingredient dropped
-        ///     into the station's trigger zone joins the queue; removing it leaves the queue.
-        ///     Requires a collider with Is Trigger enabled on this object.
-        /// </summary>
         private void OnTriggerEnter(Collider other)
         {
             var ingredient = FindIngredient(other);
@@ -78,7 +69,6 @@ namespace _Project.Code.Gameplay.Chores
                 : col.GetComponent<Ingredient>();
         }
 
-        /// <summary>Adds an ingredient to the station queue (trigger zone or drag-and-drop).</summary>
         public void AddIngredient(Ingredient ingredient)
         {
             if (ingredientsAtStation.Contains(ingredient)) return;

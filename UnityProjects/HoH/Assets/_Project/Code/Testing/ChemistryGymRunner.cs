@@ -7,13 +7,6 @@ using UnityEngine;
 
 namespace _Project.Code.Testing
 {
-    /// <summary>
-    ///     Gym for ChemistrySystem. Runs a fixed set of combination cases once on
-    ///     Start and logs PASS/FAIL per case plus a summary. No rerun key — the
-    ///     F row belongs to the ingredient spawners now; re-enter play mode to rerun.
-    ///     Also subscribes to OnCombinationResolved to prove the Observer event fires —
-    ///     this gym is the first listener the event ever had.
-    /// </summary>
     public class ChemistryGymRunner : MonoBehaviour
     {
         [Header("System under test")] [SerializeField]
@@ -83,7 +76,6 @@ namespace _Project.Code.Testing
                       $"Events raised: {eventCount}/{total} {(eventsOk ? "OK" : "MISMATCH")} =====");
         }
 
-        /// <summary>Returns 1 on pass, 0 on fail, so results can be summed.</summary>
         private int RunCase(string label, OutcomeType expectedType, string expectedName,
             params (IngredientData data, bool processed)[] setup)
         {

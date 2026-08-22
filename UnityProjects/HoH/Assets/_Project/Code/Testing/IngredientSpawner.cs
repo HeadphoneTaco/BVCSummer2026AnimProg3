@@ -5,22 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace _Project.Code.Testing
 {
-    /// <summary>
-    ///     Gym utility: a single-flavor ingredient dispenser. Each spawner instance
-    ///     serves exactly ONE raw ingredient from the shared PrefabBucket — six
-    ///     vending machines with one button each, not one machine spawning the
-    ///     whole menu at once.
-    ///
-    ///     Which ingredient: the Ingredient Name field, or — left blank — the last
-    ///     underscore-chunk of the GameObject's name ("Decor_Spawner_Water" → "Water").
-    ///
-    ///     Which key: F1 + the ingredient's index in an ALPHABETICALLY SORTED copy of
-    ///     the bucket. The bucket's internal order is whatever the asset watcher found
-    ///     first — not stable, not meaningful — so sorting in code is what makes the
-    ///     keymap predictable: F1 Fruits, F2 Gunpowder, F3 Herbs, F4 Oils, F5 Powders,
-    ///     F6 Water, and any future ingredient slots in alphabetically. The F row is
-    ///     exclusively the spawners' — the gym runner's F5 rerun is gone.
-    /// </summary>
     public class IngredientSpawner : MonoBehaviour
     {
         // F1..F12 is the whole top row — the hard ceiling for one-key spawning.

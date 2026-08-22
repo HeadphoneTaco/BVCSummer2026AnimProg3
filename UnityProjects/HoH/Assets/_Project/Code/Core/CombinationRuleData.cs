@@ -6,11 +6,6 @@ using UnityEngine;
 
 namespace _Project.Code.Core
 {
-    /// <summary>
-    ///     ScriptableObject defining one combination rule.
-    ///     Author one asset per known combination in _Project/ScriptableObjects/Recipes/.
-    ///     Order of ingredients does not matter — lookup normalises before matching.
-    /// </summary>
     [CreateAssetMenu(fileName = "NewCombinationRule", menuName = "House of Healing/Combination Rule")]
     public class CombinationRuleData : ScriptableObject
     {
@@ -20,11 +15,6 @@ namespace _Project.Code.Core
         public string resultName;
         public Item resultItem;
 
-        /// <summary>
-        ///     True when the staged ingredients are exactly this rule's ingredients,
-        ///     in any order, duplicates counted. A multiset comparison: Water+Water+Herbs
-        ///     only matches a rule authored with two Waters and one Herbs.
-        /// </summary>
         public bool Matches(IReadOnlyList<IngredientData> stagedData)
         {
             if (stagedData == null || stagedData.Count != ingredients.Length) return false;

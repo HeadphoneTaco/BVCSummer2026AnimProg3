@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace _Project.Code.UI
 {
-    /// <summary>
-    ///     View half of the inventory MVC split. Subscribes to InventorySystem.OnInventoryChanged
-    ///     and rewrites its label — no per-frame polling, and InventorySystem never knows this exists.
-    ///     Put on a Canvas text object and assign both references.
-    /// </summary>
     public class InventoryDisplay : MonoBehaviour
     {
         [SerializeField] private InventorySystem inventorySystem;

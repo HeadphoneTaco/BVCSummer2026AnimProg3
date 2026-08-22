@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Chores
 {
-    /// <summary>
-    ///     A world-space ingredient object the player can walk up to and interact with.
-    ///     On Interact: if raw, attempts processing. If processed, stores in InventorySystem.
-    ///     Requires a Collider on the Interactable layer.
-    /// </summary>
     public class IngredientPickup : MonoBehaviour, IInteractable
     {
         [SerializeField] private Ingredient ingredient;

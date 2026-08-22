@@ -14,10 +14,8 @@ namespace _Project.Code.Gameplay.Systems
         public int TargetRemedies => targetRemedies;
         public bool QuotaReached => RemediesCrafted >= targetRemedies;
 
-        /// <summary>Raised on every counted delivery with (delivered, target).</summary>
         public event Action<int, int> OnQuotaChanged;
 
-        /// <summary>Raised once, when the day's quota is met.</summary>
         public event Action OnQuotaReached;
 
         private void OnEnable()

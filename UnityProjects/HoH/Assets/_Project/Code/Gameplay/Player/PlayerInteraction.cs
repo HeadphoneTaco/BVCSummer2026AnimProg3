@@ -4,15 +4,6 @@ using UnityEngine.InputSystem;
 
 namespace _Project.Code.Gameplay.Player
 {
-    /// <summary>
-    ///     Detects nearby IInteractable objects via sphere overlap and triggers them on Interact press.
-    ///     Draws a screen-space prompt label via OnGUI. Rudimentary by choice: it needs no Canvas,
-    ///     which keeps the interaction system droppable into a scene with no UI set up yet.
-    ///
-    ///     OnGUI fires several times per frame (Layout and Repaint at minimum). Both the style
-    ///     and the prompt string are therefore built once and reused, and rebuilt only when the
-    ///     target actually changes, rather than allocated on every pass.
-    /// </summary>
     public class PlayerInteraction : MonoBehaviour
     {
         [Header("Interaction")] [SerializeField]
@@ -68,13 +59,6 @@ namespace _Project.Code.Gameplay.Player
             interactAction?.action.Disable();
         }
 
-        /// <summary>
-        ///     Asks the current target for its label once per frame and flags a rebuild when it
-        ///     has changed. The label is not constant for a given object: a processing station
-        ///     reports how many raw ingredients are queued, so caching per target rather than per
-        ///     text would show a stale count. Once per frame is the right rate for that, since
-        ///     OnGUI runs several times per frame and the value cannot change between passes.
-        /// </summary>
         private void RefreshPromptText()
         {
             if (currentTarget == null)
@@ -114,10 +98,6 @@ namespace _Project.Code.Gameplay.Player
             GUI.Box(promptRect, promptContent, promptStyle);
         }
 
-        /// <summary>
-        ///     Measures the label and positions its box. Grows up to a maximum width, then wraps
-        ///     and grows downward, so a long prompt is never clipped.
-        /// </summary>
         private void RebuildPromptLayout()
         {
             promptContent = new GUIContent($"[{promptKeyLabel}] {promptText}");

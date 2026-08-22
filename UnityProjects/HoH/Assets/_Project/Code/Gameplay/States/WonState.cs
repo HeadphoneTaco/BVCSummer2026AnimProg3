@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.States
 {
-    /// <summary>Quota filled before the clock ran out. Frozen until the restart key.</summary>
     public class WonState : IState
     {
         private readonly GameManager game;

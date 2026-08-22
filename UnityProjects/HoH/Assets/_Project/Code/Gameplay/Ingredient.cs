@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay
 {
-    /// <summary>
-    ///     MonoBehaviour representing a single ingredient instance in the scene.
-    ///     Implements both IIngredient (for ChemistrySystem) and IProcessable (for ProcessingSystem).
-    ///     These are separate interfaces by design — each system only sees what it needs.
-    /// </summary>
     public class Ingredient : MonoBehaviour, IIngredient, IProcessable
     {
         public IngredientData data;
@@ -47,11 +42,6 @@ namespace _Project.Code.Gameplay
             ApplyProcessedVisual();
         }
 
-        /// <summary>
-        ///     Placeholder state feedback: tint every renderer so raw and processed
-        ///     are distinguishable at a glance. Instance materials only — the shared
-        ///     material assets are never touched.
-        /// </summary>
         private void ApplyProcessedVisual()
         {
             foreach (var rend in GetComponentsInChildren<Renderer>())
