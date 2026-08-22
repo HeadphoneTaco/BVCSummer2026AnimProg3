@@ -8,13 +8,7 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
-    /// <summary>
-    ///     Evaluates ingredient combinations and raises OnCombinationResolved.
-    ///     Does not manage inventory — that is InventorySystem's responsibility.
-    ///     Accepts 2 or 3 processed ingredients only.
-    ///     Spec rule enforced here: no raw ingredient can succeed, and that check
-    ///     happens BEFORE any rule lookup is attempted.
-    /// </summary>
+    
     public class ChemistrySystem : MonoBehaviour
     {
         [Tooltip("All authored CombinationRuleData assets.")] [SerializeField]
@@ -27,18 +21,10 @@ namespace _Project.Code.Gameplay.Systems
         [Tooltip("Offset from the spawn transform, so items pop out beside the bench instead of inside it.")]
         [SerializeField] private Vector3 spawnOffset = new(0f, 1f, 0.75f);
 
-        /// <summary>
-        ///     Observer hook. CleaningSystem creates a mess on Neutral/Fail.
-        ///     Inventory and quota no longer listen here — they respond to
-        ///     DeliveryShelf.OnItemDelivered, since crafting only pays out on delivery.
-        /// </summary>
+    
         public static event Action<OutcomeResult> OnCombinationResolved;
 
-        /// <summary>
-        ///     Entry point called by ChemistryWorkbench with the staged ingredients.
-        ///     Returns the resolved outcome, or null when the input was not a valid
-        ///     combination attempt (wrong count) — no event is raised in that case.
-        /// </summary>
+    
         public OutcomeResult Evaluate(List<IIngredient> stagedIngredients)
         {
             // Not a combination attempt — reject without an outcome or event.
@@ -59,20 +45,13 @@ namespace _Project.Code.Gameplay.Systems
             {
                 if (!rule.Matches(stagedData)) continue;
 
-                // The outcome type decides inventory and mess (via listeners); the physical
-                // result spawns for ANY rule that authored one. A salad is still a salad
-                // even when it isn't a remedy. Spawned at a world position, NOT parented —
-                // results are free physics objects, not children of the bench.
-                if (rule.resultItem != null)
+                               if (rule.resultItem != null)
                 {
                     var anchor = itemSpawnTransform != null ? itemSpawnTransform : transform;
                     var spawnPosition = anchor.position + anchor.TransformVector(spawnOffset);
                     var spawned = Instantiate(rule.resultItem, spawnPosition, Quaternion.identity);
 
-                    // Stamp the rule's result name onto the spawned item so the delivery
-                    // shelf reports the same name the recipe authored — one source of truth,
-                    // regardless of what the prefab's Inspector field says.
-                    spawned.ItemName = rule.resultName;
+                                       spawned.ItemName = rule.resultName;
                 }
 
                 return Resolve(new OutcomeResult(rule.outcomeType, rule.resultName));

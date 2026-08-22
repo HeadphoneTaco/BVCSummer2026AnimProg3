@@ -4,10 +4,7 @@ using UnityEngine;
 
 namespace _Project.Code.UI
 {
-    /// <summary>
-    ///     View for QuotaSystem. Shows "Remedies x/y" and swaps to the day-complete
-    ///     message when the quota lands. Event-driven, same shape as InventoryDisplay.
-    /// </summary>
+   
     public class QuotaDisplay : MonoBehaviour
     {
         [SerializeField] private QuotaSystem quotaSystem;

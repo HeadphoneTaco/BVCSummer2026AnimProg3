@@ -2,13 +2,7 @@ using UnityEngine;
 
 namespace _Project.Code
 {
-    /// <summary>
-    ///     CharacterController-driven locomotion for the third person stack.
-    ///     Pair this with PlayerLocomotionInput, PlayerState, PlayerActionsInput and PlayerAnimation
-    ///     on the same GameObject, and with the HandcraftedCharacterController animator.
-    ///     This is the counterpart to the Rigidbody-based PlayerController, not a replacement for it.
-    ///     Do not put both on the same prefab.
-    /// </summary>
+  
     [DefaultExecutionOrder(-1)]
     [RequireComponent(typeof(CharacterController))]
     public class ThirdPersonController : MonoBehaviour
@@ -99,10 +93,7 @@ namespace _Project.Code
             _characterController.Move(motion * Time.deltaTime);
         }
 
-        /// <summary>
-        ///     Turns the raw stick or WASD input into a world direction relative to where the camera
-        ///     is looking, flattened onto the ground plane.
-        /// </summary>
+      
         private Vector3 GetCameraRelativeMoveDirection()
         {
             var cameraForward = cameraTransform.forward;

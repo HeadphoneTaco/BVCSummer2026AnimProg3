@@ -6,11 +6,7 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
-    /// <summary>
-    ///     Handles all player-triggered processing actions.
-    ///     Selects the correct IProcessingStrategy based on ingredient category and calls Execute().
-    ///     Raises OnIngredientProcessed after a successful transition.
-    /// </summary>
+
     public class ProcessingSystem : MonoBehaviour
     {
         private readonly InorganicProcessingStrategy inorganicStrategy = new();
@@ -19,9 +15,7 @@ namespace _Project.Code.Gameplay.Systems
         private readonly SolventProcessingStrategy solventStrategy = new();
         public static event Action<IIngredient> OnIngredientProcessed;
 
-        /// <summary>
-        ///     Entry point called by UI or player interaction.
-        /// </summary>
+    
         public void ProcessIngredient(Ingredient ingredient)
         {
             if (ingredient.IsProcessed())

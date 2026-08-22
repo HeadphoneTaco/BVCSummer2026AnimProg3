@@ -4,13 +4,7 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
-    /// <summary>
-    ///     Win condition: the house needs a quota of remedies DELIVERED to end the day.
-    ///     Observer on DeliveryShelf.OnItemDelivered — crafting a remedy earns nothing
-    ///     until it reaches the shelf; the bench cooks, the shelf serves, and only
-    ///     served plates count. Raises OnQuotaReached once. Knows nothing about UI,
-    ///     the chemistry internals, or the shelf beyond its event.
-    /// </summary>
+  
     public class QuotaSystem : MonoBehaviour
     {
         [Tooltip("Delivered remedies required to complete the day.")] [SerializeField]

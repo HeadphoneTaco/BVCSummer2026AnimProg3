@@ -8,7 +8,7 @@ namespace _Project.Code.Core
 {
     /// <summary>
     ///     ScriptableObject defining one combination rule.
-    ///     Author one asset per known combination in ScriptableObjects/GameData/.
+    ///     Author one asset per known combination in _Project/ScriptableObjects/Recipes/.
     ///     Order of ingredients does not matter — lookup normalises before matching.
     /// </summary>
     [CreateAssetMenu(fileName = "NewCombinationRule", menuName = "House of Healing/Combination Rule")]

@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8293396804356960572}
   - component: {fileID: 6869268995103396338}
   m_Layer: 0
-  m_Name: Decor_Spawner_Oils
+  m_Name: Testing_Spawner_Herbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

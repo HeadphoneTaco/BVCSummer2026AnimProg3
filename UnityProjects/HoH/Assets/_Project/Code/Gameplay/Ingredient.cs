@@ -45,7 +45,6 @@ namespace _Project.Code.Gameplay
             Debug.Log($"{data.ingredientName} processed. State: processed.");
 
             ApplyProcessedVisual();
-            // TODO: animation and sound on top of the tint
         }
 
         /// <summary>

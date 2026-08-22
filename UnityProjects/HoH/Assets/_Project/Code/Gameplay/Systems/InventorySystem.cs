@@ -7,22 +7,13 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
-    /// <summary>
-    ///     Manages the building inventory and ingredient storage.
-    ///     The building inventory is what has been DELIVERED to the shelf, not what
-    ///     the bench has produced — a remedy sitting on the floor beside the workbench
-    ///     is not in stock. Subscribes to DeliveryShelf.OnItemDelivered.
-    ///     Foundational build: flat list, no sorting, filtering, or quantity tracking.
-    /// </summary>
+   
     public class InventorySystem : MonoBehaviour
     {
         private readonly List<string> buildingInventory = new();
         private readonly List<IngredientData> ingredientStorage = new();
 
-        /// <summary>
-        ///     Raised whenever the inventory contents change. The display (view) subscribes
-        ///     to this instead of polling — the model never references the UI.
-        /// </summary>
+       
         public event Action OnInventoryChanged;
 
         private void OnEnable()
@@ -49,8 +40,7 @@ namespace _Project.Code.Gameplay.Systems
             OnInventoryChanged?.Invoke();
         }
 
-        /// <summary>Returns a newline-separated list for the rudimentary UI text display.</summary>
-        public string GetBuildingInventoryText()
+              public string GetBuildingInventoryText()
         {
             if (buildingInventory.Count == 0) return "(empty)";
             var sb = new StringBuilder();

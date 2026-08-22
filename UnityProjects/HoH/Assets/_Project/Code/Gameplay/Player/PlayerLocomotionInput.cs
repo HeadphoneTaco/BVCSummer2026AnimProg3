@@ -7,6 +7,9 @@ namespace _Project.Code
     public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions
     {
         [SerializeField] private bool holdToSprint = true;
+
+        private PlayerControls controls;
+
  
         public Vector2 MovementInput { get; private set; }
  
@@ -26,21 +29,25 @@ namespace _Project.Code
                 return;
             }
  
-            PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.Enable();
-            PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.SetCallbacks(this);
+            controls = PlayerInputManager.Instance.PlayerControls;
+            controls.PlayerLocomotionMap.Enable();
+            controls.PlayerLocomotionMap.SetCallbacks(this);
  
         }
  
         private void OnDisable()
         {
-            if (PlayerInputManager.Instance?.PlayerControls == null)
-            {
-                Debug.LogError("Player controls is not initialized - cannot disable");
-                return;
-            }
+            // Unsubscribing goes through the reference captured in OnEnable, not through the
+            // singleton. Unity destroys scene objects in an unspecified order, so on play mode
+            // exit and on every scene reload the manager can already be gone by the time this
+            // runs. Asking a destroyed manager for controls this component already holds turns
+            // a normal shutdown into a logged error. PlayerControls is a plain C# object, so it
+            // outlives the MonoBehaviour that created it and is still safe to disable here.
+            if (controls == null) return;
  
-            PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.Disable();
-            PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.RemoveCallbacks(this);
+            controls.PlayerLocomotionMap.Disable();
+            controls.PlayerLocomotionMap.RemoveCallbacks(this);
+            controls = null;
         }
  
         private void LateUpdate()
@@ -51,7 +58,6 @@ namespace _Project.Code
         public void OnMovement(InputAction.CallbackContext context)
         {
             MovementInput = context.ReadValue<Vector2>();
-            print(MovementInput);
         }
  
         public void OnLook(InputAction.CallbackContext context)

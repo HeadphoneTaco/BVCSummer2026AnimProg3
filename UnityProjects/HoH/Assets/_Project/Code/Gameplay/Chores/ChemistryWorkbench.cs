@@ -5,11 +5,7 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Chores
 {
-    /// <summary>
-    ///     A world-space chemistry workbench. The player adds 2–3 processed ingredients,
-    ///     then interacts to trigger ChemistrySystem evaluation.
-    ///     Interacting again while empty clears any lingering mess via CleaningSystem.
-    /// </summary>
+ 
     public class ChemistryWorkbench : MonoBehaviour, IInteractable
     {
         [Tooltip("Auto-filled from this object if left empty — the system lives on the bench.")]
@@ -70,12 +66,7 @@ namespace _Project.Code.Gameplay.Chores
             }
         }
 
-        /// <summary>
-        ///     Physical staging: an ingredient dropped into the bench's trigger zone is staged,
-        ///     raw or processed — chemistry decides what a raw one costs you, not the bench.
-        ///     Combining still only happens on Interact, so the decision stays with the player.
-        /// </summary>
-        private void OnTriggerEnter(Collider other)
+            private void OnTriggerEnter(Collider other)
         {
             var ingredient = FindIngredient(other);
             if (ingredient == null || stagedIngredients.Contains(ingredient)) return;
@@ -102,10 +93,7 @@ namespace _Project.Code.Gameplay.Chores
                 : col.GetComponent<Ingredient>();
         }
 
-        /// <summary>
-        ///     Stages an ingredient for the next combination.
-        ///     Accepts up to 3 ingredients per combination.
-        /// </summary>
+     
         public bool StageIngredient(IIngredient ingredient)
         {
             if (stagedIngredients.Count >= 3)

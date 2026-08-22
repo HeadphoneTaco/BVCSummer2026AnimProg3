@@ -6,6 +6,8 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionsMa
 {
     public bool AttackPressed { get; private set; }
     public bool GatherPressed { get; private set; }
+    private PlayerControls controls;
+
 
     private void OnEnable()
     {
@@ -15,20 +17,24 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionsMa
             return;
         }
 
-        PlayerInputManager.Instance.PlayerControls.PlayerActionsMap.Enable();
-        PlayerInputManager.Instance.PlayerControls.PlayerActionsMap.SetCallbacks(this);
+        controls = PlayerInputManager.Instance.PlayerControls;
+        controls.PlayerActionsMap.Enable();
+        controls.PlayerActionsMap.SetCallbacks(this);
     }
 
     private void OnDisable()
     {
-        if (PlayerInputManager.Instance?.PlayerControls == null)
-        {
-            Debug.LogError("Player controls is not initialized - cannot disable");
-            return;
-        }
+        // Unsubscribing goes through the reference captured in OnEnable, not through the
+        // singleton. Unity destroys scene objects in an unspecified order, so on play mode
+        // exit and on every scene reload the manager can already be gone by the time this
+        // runs. Asking a destroyed manager for controls this component already holds turns
+        // a normal shutdown into a logged error. PlayerControls is a plain C# object, so it
+        // outlives the MonoBehaviour that created it and is still safe to disable here.
+        if (controls == null) return;
 
-        PlayerInputManager.Instance.PlayerControls.PlayerActionsMap.Disable();
-        PlayerInputManager.Instance.PlayerControls.PlayerActionsMap.RemoveCallbacks(this);
+        controls.PlayerActionsMap.Disable();
+        controls.PlayerActionsMap.RemoveCallbacks(this);
+        controls = null;
     }
 
     private void LateUpdate()

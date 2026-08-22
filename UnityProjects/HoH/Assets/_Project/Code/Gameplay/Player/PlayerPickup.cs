@@ -1,15 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Project.Code.Gameplay.Player
 {
-    /// <summary>
-    ///     Hold-to-carry pickup. Hold the left mouse button to stick the nearest pickable
-    ///     object (an Ingredient or Item) to the player's interaction sphere; release the button
-    ///     to drop it back into the physics simulation.
-    ///
-    ///     Like a fridge magnet: while you press, the object clings to the sphere and follows it;
-    ///     let go and gravity takes over again.
-    /// </summary>
+  
     public class PlayerPickup : MonoBehaviour
     {
         [Header("Interaction sphere")]
@@ -39,8 +33,14 @@ namespace _Project.Code.Gameplay.Player
         }
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0)) TryGrab();
-            if (Input.GetMouseButtonUp(0)) Release();
+            // Input System only project: the legacy Input class throws here, it does not
+            // silently return false. Mouse.current is null when no mouse is attached.
+            var mouse = Mouse.current;
+            if (mouse != null)
+            {
+                if (mouse.leftButton.wasPressedThisFrame) TryGrab();
+                if (mouse.leftButton.wasReleasedThisFrame) Release();
+            }
 
             // Keep the held object glued to the interaction sphere each frame.
             if (heldBody != null)
@@ -93,8 +93,7 @@ namespace _Project.Code.Gameplay.Player
             heldBody = null;
         }
 
-        /// <summary>An object is pickable if it has a Rigidbody and is an Ingredient or an Item.</summary>
-        private static bool IsPickable(Collider col, out Rigidbody body)
+            private static bool IsPickable(Collider col, out Rigidbody body)
         {
             body = col != null ? col.attachedRigidbody : null;
             if (body == null) return false;

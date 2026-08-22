@@ -4,10 +4,7 @@ using UnityEngine;
 
 namespace _Project.Code.Gameplay.Systems
 {
-    /// <summary>
-    ///     Resolves mess states produced by Neutral and Fail chemistry outcomes.
-    ///     Foundational build: clears mess state without animation or feedback.
-    /// </summary>
+  
     public class CleaningSystem : MonoBehaviour
     {
         private bool messPresent;
@@ -30,8 +27,7 @@ namespace _Project.Code.Gameplay.Systems
             }
         }
 
-        /// <summary>Entry point called by the Clean button in the UI.</summary>
-        public void Clean()
+               public void Clean()
         {
             if (!messPresent)
             {
@@ -41,7 +37,6 @@ namespace _Project.Code.Gameplay.Systems
 
             messPresent = false;
             Debug.Log("[CleaningSystem] Mess cleared.");
-            // TODO A2: trigger animation and sound
         }
 
         public bool HasMess()

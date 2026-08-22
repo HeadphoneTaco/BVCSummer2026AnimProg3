@@ -1,6 +1,7 @@
 using CoreUtils.AssetBuckets;
 using _Project.Code.Gameplay;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Project.Code.Testing
 {
@@ -40,7 +41,7 @@ namespace _Project.Code.Testing
         [SerializeField] private Vector3 spawnOffset = new(0f, 1f, 0f);
 
         private GameObject prefab;
-        private KeyCode spawnKey = KeyCode.None;
+        private Key spawnKey = Key.None;
 
         private void Start()
         {
@@ -68,7 +69,7 @@ namespace _Project.Code.Testing
                     !items[i].name.Equals(wanted, System.StringComparison.OrdinalIgnoreCase)) continue;
 
                 prefab = items[i];
-                spawnKey = KeyCode.F1 + i;
+                spawnKey = Key.F1 + i;
                 Debug.Log($"[IngredientSpawner] {name}: dispensing {prefab.name} on {spawnKey}.");
                 return;
             }
@@ -78,7 +79,12 @@ namespace _Project.Code.Testing
 
         private void Update()
         {
-            if (prefab != null && Input.GetKeyDown(spawnKey))
+            // Input System only project: the legacy Input class throws rather than
+            // returning false, so this test spawner would break the gym scene.
+            if (prefab == null || spawnKey == Key.None) return;
+
+            var keyboard = Keyboard.current;
+            if (keyboard != null && keyboard[spawnKey].wasPressedThisFrame)
                 Spawn();
         }
 
